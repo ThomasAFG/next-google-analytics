@@ -12,7 +12,7 @@ const react_1 = require("react");
 const script_1 = __importDefault(require("next/script"));
 let currDataLayerName = undefined;
 function GoogleAnalytics(props) {
-    const { gaId, gaId2, debugMode, dataLayerName = 'dataLayer', nonce } = props;
+    const { gaId, gaId2 = null, debugMode, dataLayerName = 'dataLayer', nonce } = props;
     if (currDataLayerName === undefined) {
         currDataLayerName = dataLayerName;
     }
@@ -33,10 +33,13 @@ function GoogleAnalytics(props) {
           function gtag(){window['${dataLayerName}'].push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', '${gaId}' ${debugMode ? ",{ 'debug_mode': true }" : ''});
-          gtag('config', '${gaId2}' ${debugMode ? ",{ 'debug_mode': true }" : ''});`,
+          gtag('config', '${gaId}' ${debugMode ? ",{ 'debug_mode': true }" : ''}); `
+          + gaId2 && `gtag('config', '${gaId2}' ${debugMode ? ",{ 'debug_mode': true }" : ''});`,
     }, nonce: nonce
-    }), (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`, nonce: nonce }), (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId2}`, nonce: nonce })] }));
+    }),
+    (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`, nonce: nonce }), 
+    gaId2 && (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId2}`, nonce: nonce })
+    ] }));
 }
 function sendGAEvent(..._args) {
     if (currDataLayerName === undefined) {

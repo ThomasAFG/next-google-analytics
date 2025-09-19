@@ -1,6 +1,6 @@
 {
   "name": "@thomasafg/next-google-analytics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "url": "vercel/next.js",
     "directory": "packages/third-parties"

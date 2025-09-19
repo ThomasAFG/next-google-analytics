@@ -27,19 +27,35 @@ function GoogleAnalytics(props) {
             },
         });
     }, []);
-    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga-init", dangerouslySetInnerHTML: {
+    if (!gaId2 || gaId2 == null || gaId2 == undefined){
+        return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+            children: [(0, jsx_runtime_1.jsx)(script_1.default, {
+                id: "_next-ga-init", dangerouslySetInnerHTML: {
                     __html: `
           window['${dataLayerName}'] = window['${dataLayerName}'] || [];
           function gtag(){window['${dataLayerName}'].push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', '${gaId}' ${debugMode ? ",{ 'debug_mode': true }" : ''}); `
-          + gaId2 && `gtag('config', '${gaId2}' ${debugMode ? ",{ 'debug_mode': true }" : ''});`,
-    }, nonce: nonce
-    }),
-    (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`, nonce: nonce }), 
-    gaId2 && (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId2}`, nonce: nonce })
-    ] }));
+          gtag('config', '${gaId}' ${debugMode ? ",{ 'debug_mode': true }" : ''});`,
+                }, nonce: nonce
+            }), (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`, nonce: nonce })]
+        }));
+    } else {
+        return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+            children: [(0, jsx_runtime_1.jsx)(script_1.default, {
+                id: "_next-ga-init", dangerouslySetInnerHTML: {
+                    __html: `
+            window['${dataLayerName}'] = window['${dataLayerName}'] || [];
+            function gtag(){window['${dataLayerName}'].push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${gaId}' ${debugMode ? ",{ 'debug_mode': true }" : ''}); 
+            gtag('config', '${gaId2}' ${debugMode ? ",{ 'debug_mode': true }" : ''});`,
+                }, nonce: nonce
+            }), (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`, nonce: nonce }),
+            (0, jsx_runtime_1.jsx)(script_1.default, { id: "_next-ga", src: `https://www.googletagmanager.com/gtag/js?id=${gaId2}`, nonce: nonce })]
+        }));
+    }
 }
 function sendGAEvent(..._args) {
     if (currDataLayerName === undefined) {
